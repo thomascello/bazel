@@ -138,8 +138,14 @@ def _get_cxx_inc_directories(repository_ctx, cc):
   else:
     inc_dirs = result.stderr[index1 + 1:index2].strip()
 
-  return [repository_ctx.path(_cxx_inc_convert(p))
+  print("result.stderr = '%s'" % result.stderr)
+  print("result.stdout = '%s'" % result.stdout)
+  print("inc_dirs = '%s'" % str(inc_dirs))
+  
+  r = [repository_ctx.path(_cxx_inc_convert(p))
           for p in inc_dirs.split("\n")]
+  print("result = '%s'" % str(r))
+  return r
 
 def _add_option_if_supported(repository_ctx, cc, option):
   """Checks that `option` is supported by the C compiler."""
